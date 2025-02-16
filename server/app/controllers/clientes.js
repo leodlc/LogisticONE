@@ -1,5 +1,5 @@
 const { httpError } = require('../helpers/handleError');
-const Cliente = require('../models/clientes'); // Importamos el modelo
+const Cliente = require('../models/cliente'); // Importamos el modelo
 
 // Obtener todos los clientes
 const getAllClients = async (req, res) => {

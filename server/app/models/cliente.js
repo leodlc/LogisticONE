@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 
 const ClienteSchema = new mongoose.Schema({
   nombre: { type: String, required: true },
-  direccion: { type: String, required: true },
-  telefono: { type: String, required: true },
+  direccion: { type: String, required: false },
+  telefono: { type: String, required: false },
   email: { type: String, unique: true },
   tokenFCM: { type: String }, // Para notificaciones push
   firmaDigital: { type: String }, // Firma en base64

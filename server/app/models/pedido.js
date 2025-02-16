@@ -2,8 +2,12 @@ const mongoose = require('mongoose');
 
 const PedidoSchema = new mongoose.Schema({
   cliente: { type: mongoose.Schema.Types.ObjectId, ref: 'Cliente', required: true },
-  conductor: { type: mongoose.Schema.Types.ObjectId, ref: 'Conductor', required: false }, // Puede ser asignado después
+  conductor: { type: mongoose.Schema.Types.ObjectId, ref: 'Conductor', required: false }, // Puede asignarse después
   destino: { type: mongoose.Schema.Types.ObjectId, ref: 'Destino', required: true },
+  productos: [{ 
+    producto: { type: mongoose.Schema.Types.ObjectId, ref: 'Producto', required: true },
+    cantidad: { type: Number, required: true } 
+  }],
   estado: { 
     type: String, 
     enum: ['pendiente', 'asignado', 'en camino', 'entregado', 'cancelado'], 
