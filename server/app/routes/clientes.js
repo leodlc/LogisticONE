@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { getAllClients, getClientByName, createClient, updateClient, deleteClient } = require('../controllers/clientes');
+const { getAllClients, getClientByName, createClient, updateClient, deleteClient, updateClientFCMToken } = require('../controllers/clientes');
 
 router.get('/', getAllClients);
 
@@ -11,7 +11,7 @@ router.post('/createClient', createClient);
 
 router.patch('/:id', updateClient);
 
-
+router.patch('/:id/tokenFCM', updateClientFCMToken); 
 router.delete('/:id', deleteClient);
 
 module.exports = router;

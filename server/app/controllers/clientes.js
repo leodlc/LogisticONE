@@ -73,10 +73,40 @@ const deleteClient = async (req, res) => {
   }
 };
 
+// Actualizar el tokenFCM de un cliente
+const updateClientFCMToken = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { tokenFCM } = req.body;
+
+    if (!tokenFCM) {
+      return res.status(400).json({ error: 'El tokenFCM es requerido' });
+    }
+
+    const updatedClient = await Cliente.findByIdAndUpdate(
+      id, 
+      { tokenFCM }, 
+      { new: true }
+    );
+
+    if (!updatedClient) {
+      return res.status(404).json({ error: 'Cliente no encontrado' });
+    }
+
+    console.log(`Token FCM actualizado para Cliente (ID: ${id}): ${tokenFCM}`);
+
+    res.json({ message: 'Token FCM actualizado correctamente', data: updatedClient });
+  } catch (e) {
+    console.error("Error en updateClientFCMToken:", e);
+    httpError(res, e);
+  }
+};
+
 module.exports = {
   getAllClients,
   getClientByName,
   createClient,
   updateClient,
-  deleteClient
+  deleteClient,
+  updateClientFCMToken
 };

@@ -2,6 +2,22 @@ const { httpError } = require('../helpers/handleError');
 const Ubicacion = require('../models/ubicacion');
 const admin = require('firebase-admin'); // Firebase SDK
 
+// Crear ubicacion para pruebas en postman
+const createUbicacion = async (req, res) => {
+  try {
+    const nuevaUbicacion = new Ubicacion(req.body);
+    const ubicacionGuardada = await nuevaUbicacion.save();
+
+    res.status(201).json({
+      message: 'Ubicación creada exitosamente',
+      data: ubicacionGuardada
+    });
+  } catch (e) {
+    console.error("Error in createUbicacion:", e);
+    httpError(res, e);
+  }
+};
+
 // Obtener la ubicación de un cliente o conductor
 const getUbicacionById = async (req, res) => {
   try {
@@ -42,6 +58,7 @@ const updateUbicacionConductor = async (req, res) => {
 };
 
 module.exports = {
+  createUbicacion,
   getUbicacionById,
   updateUbicacionConductor
 };
